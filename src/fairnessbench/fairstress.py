@@ -32,7 +32,7 @@ from inspect_ai.dataset import Sample, hf_dataset
 from inspect_ai.model import GenerateConfig
 from inspect_ai.solver import generate
 
-from fairnessbench.scorer import fairstress_scorer
+from scorer import fairstress_scorer
 
 DATASET_PATH = "allenai/fairstress"
 # Pinned to a specific `main` branch commit so results stay reproducible.
