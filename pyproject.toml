@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fairnessbench"
+version = "0.1.0"
+description = "FairStress procedural-fairness benchmark for LLM decision making, implemented for Inspect AI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Murali Mani" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "inspect_ai>=0.3.132",
+    "datasets>=2.16.0",
+    "huggingface_hub>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/muralimani/FairnessBench"
+"Source Code" = "https://github.com/muralimani/FairnessBench"
+"Issue Tracker" = "https://github.com/muralimani/FairnessBench/issues"
+
+[project.entry-points.inspect_ai]
+fairnessbench = "fairnessbench"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+src = ["src"]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "D", "I", "UP"]
+ignore = ["E203", "E501", "D10", "D212", "D415"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+warn_unused_ignores = true
+no_implicit_reexport = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-rA --color=yes"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "huggingface: marks tests that depend on Hugging Face downloads",
+]
